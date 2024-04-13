@@ -2,7 +2,7 @@ let Game = {
     mana: 0,
     manaThisAscension: 0,
     manaAllTime: 0,
-    upgradesBought: upgradeList.generateBoughtList(),
+    buildingsBought: buildingList.generateBoughtList(),
 }
 
 /* onload
@@ -21,14 +21,14 @@ document.getElementById('increase-mana').addEventListener('click', function() {
 function updateView() {
     document.getElementById('mana-number').textContent = Game.mana;
     let mps = 0;
-    upgradeList.list.forEach((upgrade) => {
-        let currentCost = Math.floor(upgradeList.getByName(upgrade.name).baseCost * Math.pow(1.1, Game.upgradesBought[upgrade.name]));
-        document.getElementById(`bought-${upgrade.name}`).textContent = Game.upgradesBought[upgrade.name];
-        document.getElementById(`cost-${upgrade.name}`).textContent = currentCost;
-        document.getElementById(`mps-${upgrade.name}`).textContent = upgradeList.getByName(upgrade.name).manaPerSecond * Game.upgradesBought[upgrade.name];
-        mps += upgradeList.getByName(upgrade.name).manaPerSecond * Game.upgradesBought[upgrade.name];
+    buildingList.list.forEach((building) => {
+        let currentCost = Math.floor(buildingList.getByName(building.name).baseCost * Math.pow(1.1, Game.buildingsBought[building.name]));
+        document.getElementById(`bought-${building.name}`).textContent = Game.buildingsBought[building.name];
+        document.getElementById(`cost-${building.name}`).textContent = currentCost;
+        document.getElementById(`mps-${building.name}`).textContent = buildingList.getByName(building.name).manaPerSecond * Game.buildingsBought[building.name];
+        mps += buildingList.getByName(building.name).manaPerSecond * Game.buildingsBought[building.name];
 
-        let buttonElement = document.getElementById(`buy-building-${upgrade.name}`);
+        let buttonElement = document.getElementById(`buy-building-${building.name}`);
         if (!canBuy(currentCost)) {
             //buttonElement.classList.add('disabled');
             buttonElement.disabled = true;
@@ -65,7 +65,7 @@ function initialize() {
     };
     load();
 
-    upgradeList.generateUpgradeHtml();
+    buildingList.generateBuildingHtml();
 }
 
 //updateView()

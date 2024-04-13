@@ -1,4 +1,4 @@
-class Upgrade {
+class Building {
 
     constructor(name, prettyName, baseCost = 0, manaPerSecond = 0) {
         this.name = name;
