@@ -12,8 +12,15 @@ function autoClick() {
 
 function buyUpgrade(upgrade) {
     const cost = Math.floor(upgradeList.getByName(upgrade).baseCost * Math.pow(1.1, Game.upgradesBought[upgrade]));
-    if (cost > Game.mana) return;
+    if (!canBuy(cost)) return;
 
     Game.mana -= cost;
     Game.upgradesBought[upgrade] += 1;
+}
+
+function canBuy(cost) {
+    if (Game.mana >= cost) {
+        return true;
+    }
+    return false
 }
